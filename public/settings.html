@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      id="favicon"
+      href="/media/logggo.svg"
+    />
+    <link rel="stylesheet" href="/./main.css" />
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <main
+      class="center"
+      style="display: flex; flex-direction: row; gap: 20px; flex-wrap: wrap;"
+    >
+    <p> LUNAAR IS GOING AWAY DUE TO DMCA JOIN THE <a href="https://discord.gg/PgAuwUMAFw" class="link">DISCORD SERVER</a> TO VOTE ON A NEW NAME </h1>
+      <div class="setting-card card">
+        <h1>Theme</h1>
+        <select id="theme-select">
+          <option value="main">Main Theme</option>
+          <!-- <option value="grey">Grey Theme</option> -->
+          <option value="greyblack">Grey black Theme</option>
+          <option value="bone">BONELAB theme</option>
+          <option value="ghost">Black &amp; Red Theme</option>
+          <option value="gb">Greyish Blue</option>
+          <option value="gg">Greyish Green</option>
+          <option value="brown">Brown</option>
+          <option value="dg">Dark Orange</option>
+          <option value="moon">Moon</option>
+          <option value="red">Red Theme (static)</option>
+          <option value="sblue">Sahara Blue Theme</option>
+          <option value="candy">Cotton Candy Theme</option>
+          <option value="lgray">Eye Killer Theme</option>
+        </select>
+      </div>
+      <div class="setting-card card">
+        <br />
+        <h1>Clickoff Cloak</h1>
+        <p style="font-size: 19px">
+          When you click out of this tab, it will automatically Cloaks
+        </p>
+        <label class="switch">
+          <input type="checkbox" id="clickoffcloak" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div class="setting-card card">
+        <h1>Tab Cloak</h1>
+        <div>
+          <select id="presetDropdown" onchange="applyPreset()">
+            <option value="default">Default</option>
+            <option value="preset1">GoogleDrive</option>
+            <option value="preset2">Gmail</option>
+            <option value="preset3">Google Search</option>
+            <option value="preset4">Zoom</option>
+            <option value="preset5">Meet</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-card card" style="gap: 10px;">
+        <div>
+          <h1>Custom Cloak</h1>
+          <input
+            type="text"
+            id="custom-favicon-input"
+            placeholder="Enter URL"
+          />
+        </div>
+        <div>
+          <input type="text" id="title-input" placeholder="Enter page title" />
+        </div>
+        <button onclick="saveSettings()" class="btn btn-primary">
+          Save Settings
+        </button>
+      </div>
+      <div class="setting-card card">
+        <h1>About:Blank Cloak</h1>
+        <span class="badge">Recommended</span>
+        <p style="font-size: 19px">Hides the page in a about:blank URL</p>
+        <button class="btn btn-primary" onclick="createBlank()">Launch</button>
+      </div>
+      <div class="setting-card card">
+        <h1>Reset All settings</h1>
+        <a class="btn btn-primary" onclick="resetSettings()"
+          >Reset All settings</a
+        >
+        <p>*this will reset your theme, proxy, and tab cloak*</p>
+      </div>
+    </main>
+    <script>
+      const originalTitle = document.title;
+      const favicon = document.querySelector("#favicon").getAttribute("href");
+
+      function changeTabCloak(title, favicon) {
+        document.title = title;
+        document.querySelector("#favicon").setAttribute("href", favicon);
+      }
+
+      function applyPreset() {
+        const dropdown = document.getElementById("presetDropdown");
+        const selectedPreset = dropdown.value;
+
+        switch (selectedPreset) {
+          case "default":
+            changeTabCloak(originalTitle, favicon);
+            break;
+          case "preset1":
+            changeTabCloak("My Drive - Google Drive", "/media/cloaks/GoogleDrive.ico");
+            break;
+          case "preset2":
+            changeTabCloak("Inbox (162) - Gmail ", "/media/cloaks/Gmail.ico");
+            break;
+          case "preset3":
+            changeTabCloak("Google", "/media/cloaks/Google Search.ico");
+            break;
+          case "preset4":
+            changeTabCloak("Zoom", "/media/cloaks/Zoom.ico");
+            break;
+          case "preset5":
+            changeTabCloak("Google Meet", "/media/cloaks/Meet.ico");
+            break;
+          default:
+            break;
+        }
+      }
+
+      function saveSettings() {
+        const customTitle = document.getElementById("title-input").value;
+        const customFavicon = document.getElementById("custom-favicon-input").value;
+
+        sessionStorage.setItem("savedTitle", customTitle);
+        sessionStorage.setItem("savedFavicon", customFavicon);
+
+        changeTabCloak(customTitle, customFavicon);
+      }
+
+      function createBlank() {
+        win = window.open();
+        win.document.body.style.margin = "0";
+        win.document.body.style.height = "100vh";
+        var iframe = win.document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.margin = "0";
+        iframe.referrerpolicy = "no-referrer";
+        iframe.allow = "fullscreen";
+        iframe.src = location.origin;
+        win.document.body.appendChild(iframe);
+        window.location.href = "https://www.google.com/search?q=what+day+is+today";
+      }
+    </script>
+    <script>
+      function resetSettings() {
+
+          localStorage.clear();
+
+          sessionStorage.clear();
+
+          alert("All settings have been reset.");
+          window.location.reload()
+      }
+    </script>
+    <script src="js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/particles.js"></script>
+    <script
+      type="text/javascript"
+      src="//rethinkexercisesupplement.com/f7/32/53/f73253aa6c42bc3c0dc426d6f074a5dd.js"
+    ></script>
+  </body>
+</html>
